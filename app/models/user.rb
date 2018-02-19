@@ -9,7 +9,17 @@ class User < ApplicationRecord
 
   belongs_to :userable, polymorphic: true, dependent: :destroy, required: false
 
+  has_and_belongs_to_many :technologies, required: true
+
   def full_name
     first_name + ' ' + last_name
+  end
+
+  def mentor?
+    userable_type == 'Mentor'
+  end
+
+  def team?
+    userable_type == 'Team'
   end
 end
