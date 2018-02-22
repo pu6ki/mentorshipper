@@ -4,4 +4,6 @@ class Team < ApplicationRecord
   validates :name, presence: true, length: { maximum: 500 }
 
   belongs_to :mentor
+
+  has_many :posts
 end
