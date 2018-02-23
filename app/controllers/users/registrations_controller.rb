@@ -11,22 +11,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   #POST /resource
   def create
-    sent_technologies = params[:user][:technologies]
-    technologies = []
-
-    sent_technologies.each do |name, technology|
-      technologies.push(Technology.find_or_create_by!({name: technology}))
+    technologies = params[:user][:technologies]
+    technologies.map! do |technology_name|
+      Technology.find_or_create_by!(name: technology_name)
     end
 
-    @user = User.create(
-      :email => params[:user][:email],
-      :password => params[:user][:password],
-      :first_name => params[:user][:first_name],
-      :last_name => params[:user][:last_name],
-      :technologies => technologies
-    )
+    @user = User.create!(params[:user].permit!)
 
-    render :json => @user
+    render json: @user
   end
 
   # GET /resource/edit
