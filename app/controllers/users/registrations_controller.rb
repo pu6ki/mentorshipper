@@ -11,14 +11,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   #POST /resource
   def create
-    technologies = params[:user][:technologies]
-    technologies.map! do |technology_name|
-      Technology.find_or_create_by!(name: technology_name)
+    params[:user][:technologies].map! do |technology|
+      Technology.find_or_create_by!(name: technology[:name])
     end
 
     @user = User.create!(params[:user].permit!)
 
-    render json: @user
+    render json: @user, include: { technologies: { only: :name } }
   end
 
   # GET /resource/edit
