@@ -1,1 +1,16 @@
 <h1>Create a new post</h1>
+
+<%= form_for @post do |f| %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <% f.fields_for :technologies do |technologies_fields| %>
+    Tech name: <%= technologies_fields.text_field :technology_name %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

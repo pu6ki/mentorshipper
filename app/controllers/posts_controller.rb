@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_team_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :verify_author, only: [:edit, :update, :destroy]
   before_action :set_post, only: [:show, :update, :delete]
 
   def index
@@ -15,7 +16,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new post_params
+    @post = current_team.posts.new post_params
+    @post.technologies = current_user.technologies
 
     if @post.save
       flash[:success] = 'You have successfully created a post.'
@@ -49,11 +51,19 @@ class PostsController < ApplicationController
     @post = Post.find_by id: params[:id]
   end
 
+  def current_team
+    current_user.userable
+  end
+
   def post_params
-    params.require(:post).permit(:title, :content, :technologies)
+    params.require(:post).permit(:title, :content)
   end
 
   def verify_team_user
     redirect_to posts_path unless current_user.team?
+  end
+
+  def verify_author
+    redirect_to posts_path unless @post.team == current_user.team
   end
 end
