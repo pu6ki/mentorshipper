@@ -1,0 +1,7 @@
+<h1>Choose a technology category</h1>
+
+<ul>
+  <% @technologies.each do |tech| %>
+    <li><%= link_to tech.name, posts_path(technology_name: tech.name) %><li>
+  <% end %>
+</ul>
