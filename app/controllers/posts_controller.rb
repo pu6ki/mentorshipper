@@ -5,7 +5,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :delete]
 
   def index
-    @posts = Post.all
+    if params[:technology_name]
+      @posts = Post.includes(:technologies).where(technologies: { name: params[:technology_name] })
+    else
+      @posts = Post.all
+    end
   end
 
   def show
@@ -16,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_team.posts.new post_params
+    @post = current_user.userable.posts.new post_params
     @post.technologies = current_user.technologies
 
     if @post.save
@@ -49,10 +53,6 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find_by id: params[:id]
-  end
-
-  def current_team
-    current_user.userable
   end
 
   def post_params
