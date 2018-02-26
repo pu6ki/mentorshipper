@@ -5,5 +5,5 @@ class Team < ApplicationRecord
 
   belongs_to :mentor
 
-  has_many :posts
+  has_many :questions
 end

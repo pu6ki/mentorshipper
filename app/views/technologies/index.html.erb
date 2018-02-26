@@ -2,6 +2,6 @@
 
 <ul>
   <% @technologies.each do |tech| %>
-    <li><%= link_to tech.name, posts_path(technology_name: tech.name) %><li>
+    <li><%= link_to tech.name, questions_path(technology_name: tech.name) %></li>
   <% end %>
 </ul>

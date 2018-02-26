@@ -1,0 +1,11 @@
+<% if params[:technology_name] %>
+  <h1>Questions list for <%= params[:technology_name] %></h1>
+<% else %>
+  <h1>All questions</h1>
+<% end %>
+
+<ul>
+<% @questions.each do |question| %>
+  <li><%= link_to question.title, question %></li>
+<% end %>
+<ul>

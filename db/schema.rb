@@ -10,26 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222201504) do
+ActiveRecord::Schema.define(version: 20180222201005) do
 
   create_table "mentors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.integer "team_id"
+    t.integer "technology_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_posts_on_team_id"
-  end
-
-  create_table "posts_technologies", id: false, force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "technology_id", null: false
-    t.index ["post_id", "technology_id"], name: "index_posts_technologies_on_post_id_and_technology_id"
+    t.index ["team_id"], name: "index_questions_on_team_id"
+    t.index ["technology_id"], name: "index_questions_on_technology_id"
   end
 
   create_table "teams", force: :cascade do |t|
