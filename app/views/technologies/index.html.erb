@@ -1,12 +1,11 @@
 <div class="wrapper">
   <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
-    <h1 class="text-center heading">Choose Technology</h1>
+    <h1 class="text-center heading">Choose a technology</h1>
 
     <div class="text-center">
-      <% current_user.technologies.each do |tech| %>
-        <%= link_to tech.name, questions_path(technology_name: tech.name), class: "btn btn-info col-md-3 btn-technology" %>
+      <% @technologies.each do |tech| %>
+        <%= link_to tech, questions_path(technology_name: tech.name), class: "btn btn-info col-md-3 btn-technology" %>
       <% end %>
     </div>
   </div>
 </div>
-
