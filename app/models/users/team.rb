@@ -6,4 +6,8 @@ class Team < ApplicationRecord
   belongs_to :mentor
 
   has_many :questions
+
+  def to_s
+    name
+  end
 end
