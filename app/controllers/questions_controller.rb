@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_team_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :delete]
   before_action :verify_author, only: [:edit, :update, :destroy]
-  before_action :set_question, only: [:show, :update, :delete]
 
   def index
     if params[:technology_name]
@@ -63,6 +63,6 @@ class QuestionsController < ApplicationController
   end
 
   def verify_author
-    redirect_to questions_path unless @question.team == current_user.team
+    redirect_to questions_path unless @question.team == current_user.userable
   end
 end

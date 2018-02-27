@@ -4,5 +4,13 @@
 
     <p><%= @question.content %></p>
     <p>Asked by Team "<%= @question.team %>"</p>
+
+    <hr />
+
+    <h2 class="text-center">Answers: </h2>
+
+    <% @question.answers.each do |answer| %>
+      <%= render answer %>
+    <% end %>
   </div>
 </div>
