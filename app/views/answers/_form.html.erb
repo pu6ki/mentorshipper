@@ -1,0 +1,6 @@
+<%= form_for([@question, @answer]) do |f| %>
+  <%= f.label :content, class: 'form-label'%>
+  <%= f.text_area :content, rows: 3, class: 'form-control' %>
+
+  <%= f.submit class: 'btn btn-primary'%>
+<% end %>
