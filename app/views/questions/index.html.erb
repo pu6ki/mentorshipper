@@ -2,9 +2,9 @@
   <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
     <div class="text-center">
       <% if params[:technology_name] %>
-        <h1>Questions list for <span class="text-muted"><%= params[:technology_name] %></p></h1>
+        <h1 class="heading">Questions for <span class="text-info"><%= params[:technology_name] %></p></h1>
       <% else %>
-        <h1>All questions</h1>
+        <h1 class="heading">All questions</h1>
       <% end %>
     </div>
 
@@ -13,10 +13,12 @@
         <%= link_to question, class: 'list-group-item list-group-item-action flex-column align-items-start' do %>
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"><%= question.title %></h5>
-            <small>Asked on <span class="text-muted"><%= question.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>
           </div>
           <p class="mb-1"><%= truncate(question.content, length: 100) %></p>
-          <small class="text-muted">Asked by "<%= question.team %>"</small>
+          <div class="d-inline-flex w-100 justify-content-between">
+            <small class="text-muted">Asked by "<%= question.team %>"</small>
+            <small>Asked on <span class="text-muted"><%= question.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>          
+          </div>
         <% end %>
       <% end %>
     </div>
