@@ -24,7 +24,6 @@ class AnswersController < ApplicationController
       flash[:success] = 'You have successfully created an answer.'
       redirect_to @question
     else
-      puts @answer.errors.full_messages
       render 'new'
     end
   end
