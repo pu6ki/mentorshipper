@@ -2,22 +2,24 @@
   <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
     <h1 class="text-center heading"><%= form_title %></h1>
 
-    <%= form_for @question, html: { class: 'text-center' } do |f| %>
-      <%= f.label :title, class: 'form-label' %>
+    <%= form_for @question, html: { class: '' } do |f| %>
+      <%= f.label :title, class: 'form-label text-center d-block' %>
       <%= f.text_field :title, class: 'form-control'%>
 
-      <%= f.label :content, class: 'form-label'%>
-      <%= f.text_area :content, rows: 7, class: 'form-control' %>
+      <%= f.label :content, class: 'form-label text-center d-block'%>
+      <%= f.text_area :content, rows: 7, class: 'form-control, text-left' %>
+      <span class="text-muted">Supported syntax higlighting for the following languages: C, CPlusPlus, CSS, Clojure, Debug, Delphi, Diff, ERB, Go, Groovy, HAML, HTML, JSON, Java, JavaScript, Lua, PHP, Python, Raydebug, Ruby, SQL, Sass, Scanner, Taskpaper, Text, XML, YAML</span>
+
+      <br>
 
       <% if @question.new_record? %>
-        <%= f.label :technology, class: 'form-label' %>
-        <br />
+        <%= f.label :technology, class: 'form-label text-center d-block' %>
         <%= f.select(:technology_id, options_for_select(current_user.technologies.map { |t| [t.name, t.id] }), {}, class: 'form-control') %>
       <% end %>
-
-      <br />
-
-      <%= f.submit class: 'btn btn-primary'%>
+      
+      <div class="submit-button-wrapper text-center">
+        <%= f.submit class: 'btn btn-lg btn-primary'%>
+      </div>
     <% end %>
   </div>
 </div>

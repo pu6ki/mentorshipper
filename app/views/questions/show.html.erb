@@ -2,7 +2,7 @@
   <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
     <h1 class="text-center heading"><%= @question.title %></h1>
 
-    <p><%= @question.content %></p>
+    <%= markdown(@question.content) %>
     <p>Asked by Team "<%= @question.team %>"</p>
 
     <hr />
