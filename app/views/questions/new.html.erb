@@ -1,15 +1,23 @@
-<h1>Create a new question</h1>
+<div class="wrapper">
+  <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+    <h1 class="text-center heading">Create a new question</h1>
 
-<%= form_for @question do |f| %>
+    <%= form_for @question, html: {class: 'text-center'} do |f| %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+      <%= f.label :title, class: 'form-label' %>
+      <%= f.text_field :title, class: 'form-control'%>
 
-  <%= f.label :content %>
-  <%= f.text_field :content %>
+      <%= f.label :content, class: 'form-label'%>
+      <%= f.text_area :content, rows: 7, class: 'form-control' %>
 
-  <%= f.label :technology %><br />
-  <%= f.select :technology_id, options_for_select(current_user.technologies.map{ |t| [t.name, t.id] }) %>
+      <%= f.label :technology, class: 'form-label' %>
+      <br />
+      <%= f.select(:technology_id, options_for_select(current_user.technologies.map{ |t| [t.name, t.id] }), {}, {class: 'form-control'}) %>
+      <br />
 
-  <%= f.submit %>
-<% end %>
+      <%= f.submit class: 'btn btn-primary'%>
+    <% end %>
+  </div>
+</div>
+  
+
