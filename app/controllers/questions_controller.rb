@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
 
   def index
     if params[:technology_name]
-      @questions = Question.includes(:technology).where(technologies: { name: params[:technology_name] })
+      @questions = Question.from_technology params[:technology_name]
     else
       @questions = Question.all
     end
@@ -24,9 +24,10 @@ class QuestionsController < ApplicationController
     @question = current_user.userable.questions.new question_params
 
     if @question.save
-      flash[:success] = 'You have successfully created a question.'
+      flash[:notice] = 'You have successfully created a question.'
       redirect_to @question
     else
+      flash[:alert] = @question.errors.full_messages
       render 'new'
     end
   end
@@ -36,16 +37,17 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update_attributes(question_params)
-      flash[:success] = 'Question updated successfully.'
+      flash[:notice] = 'Question updated successfully.'
       redirect_to @question
     else
+      flash[:alert] = @question.errors.full_messages
       render 'edit'
     end
   end
 
   def destroy
     @question.destroy
-    flash[:success] = 'Question successfully deleted.'
+    flash[:notice] = 'Question successfully deleted.'
     redirect_to questions_path
   end
 

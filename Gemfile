@@ -31,11 +31,17 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use Devise for user authentication and authorization
 gem 'devise'
 
+# Use Boostrap as a CSS Framework
 gem 'bootstrap', '~> 4.0.0'
-gem 'coderay'
 gem 'jquery-rails'
+# Toast flash messages
+gem 'toastr-rails'
+
+# Markdown support
+gem 'coderay'
 gem 'redcarpet'
 
 group :development, :test do
