@@ -21,9 +21,10 @@ class AnswersController < ApplicationController
     @answer.mentor = current_user.userable
 
     if @answer.save
-      flash[:success] = 'You have successfully created an answer.'
+      flash[:notice] = 'You have successfully created an answer.'
       redirect_to @question
     else
+      flash[:alert] = @answer.errors.full_messages
       render 'new'
     end
   end
@@ -33,16 +34,17 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update_attributes(answer_params)
-      flash[:success] = 'Answer updated successfully.'
+      flash[:notice] = 'Answer updated successfully.'
       redirect_to @answer
     else
+      flash[:alert] = @answer.errors.full_messages
       render 'edit'
     end
   end
 
   def destroy
     @answer.destroy
-    flash[:success] = 'Answer successfully deleted.'
+    flash[:notice] = 'Answer successfully deleted.'
     redirect_to @question
   end
 
