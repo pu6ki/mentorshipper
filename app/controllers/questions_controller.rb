@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_team_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_question, only: [:show, :edit, :update, :delete]
+  before_action :set_answer, only: [:show]
   before_action :verify_author, only: [:edit, :update, :destroy]
 
   def index
@@ -49,6 +50,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def set_answer
+    @answer = Answer.new
+  end
 
   def set_question
     @question = Question.find_by id: params[:id]

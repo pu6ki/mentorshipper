@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+  <div class="col-md-10 offset-md-1 col-sm-10 offset-sm-1">
   
     <h1 class="text-center heading"><%= @question.title %></h1>
 
@@ -15,10 +15,19 @@
       </div>
     </div>
 
-    <h2 class="text-center">Answers: </h2>
-
-    <% @question.answers.each do |answer| %>
-      <%= render answer %>
+    <hr>
+  </div>
+  <div class="col-md-8 offset-md-2">
+    <% if @question.answers.empty? %>
+      <h3 class="text-center heading">Nobody has answered this question yet.</h3>
+    <% else %>
+      <% @question.answers.each do |answer| %>
+        <%= render answer %>
+      <% end %>
     <% end %>
+  </div>
+
+  <div class="col-md-10 offset-md-1">
+    <%= render 'answers/form' %>
   </div>
 </div>

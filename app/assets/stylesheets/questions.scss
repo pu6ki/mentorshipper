@@ -5,3 +5,7 @@
 .submit-button-wrapper {
   margin: 5vh;
 }
+
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 150px !important;
+}
