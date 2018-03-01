@@ -15,6 +15,16 @@
     </ul>
     <ul class="navbar-nav ml-auto align-items-center">
       <% if user_signed_in? %>
+        <% if current_user.team? %>
+          <li class="nav-item float-xs-right">
+            <%= link_to "Team #{current_user.userable.name}", users_team_path(current_user.userable), class: 'nav-link' %>
+          </li>
+        <% elsif current_user.mentor? %>
+          <li class="nav-item float-xs-right">
+            <%= link_to 'My teams', users_teams_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+
         <li class="nav-item float-xs-right">
           <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
         </li>
