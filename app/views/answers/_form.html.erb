@@ -1,6 +1,13 @@
-<%= form_for([@question, @answer]) do |f| %>
-  <%= f.label :content, class: 'form-label'%>
-  <%= f.text_area :content, rows: 3, class: 'form-control' %>
+<div class="form-wrapper">
+  <h3 class="text-center form-heading">Add answer</h3>  
+  <%= form_for([@question, @answer]) do |f| %>
+    <%= f.text_area :content, class: 'form-control, text-left answer-editor' %>
+    <span class="text-muted">Supported syntax higlighting for the following languages: C, CPlusPlus, CSS, Clojure, Debug, Delphi, Diff, ERB, Go, Groovy, HAML, HTML, JSON, Java, JavaScript, Lua, PHP, Python, Raydebug, Ruby, SQL, Sass, Scanner, Taskpaper, Text, XML, YAML</span>
 
-  <%= f.submit class: 'btn btn-primary'%>
-<% end %>
+    <br>
+
+    <div class="submit-button-wrapper text-center">
+      <%= f.submit class: 'btn btn-lg btn-primary form-control', value: 'Add Answer'%>
+    </div>
+  <% end %>
+</div>
