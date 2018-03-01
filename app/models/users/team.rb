@@ -7,6 +7,10 @@ class Team < ApplicationRecord
 
   has_many :questions
 
+  def captain_email
+    user.email
+  end
+
   def to_s
     name
   end
