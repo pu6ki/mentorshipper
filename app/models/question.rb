@@ -10,6 +10,10 @@ class Question < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
+  include PublicActivity::Model
+  tracked owner: Proc.new { |controller, model| controller.current_user }
+  tracked recipient: Proc.new { |controller, model| model.team.mentor.user }
+
   def solved?
     answers.select(&:solving).count > 0
   end

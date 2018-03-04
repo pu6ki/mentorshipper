@@ -37,12 +37,16 @@ gem 'devise'
 # Use Boostrap as a CSS Framework
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
+
 # Toast flash messages
 gem 'toastr-rails'
 
 # Markdown support
 gem 'coderay'
 gem 'redcarpet'
+
+# Notifications
+gem 'public_activity'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

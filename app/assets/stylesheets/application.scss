@@ -41,3 +41,12 @@ body {
   margin-top: 1vh;
   margin-bottom: 3vh;
 }
+
+.dropdown-item:active, .dropdown-item:hover {
+  color: black;
+  background-color: white;
+}
+
+.notifications {
+  padding: 0;
+}
