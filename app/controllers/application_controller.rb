@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
     if current_user
       if current_user.userable_type == 'Team'
         @team = Team.joins(:user).where(users: { userable_id: current_user.userable_id }).first
-        @activities = PublicActivity::Activity.where(recipient_id: @team.user.id).order('created_at DESC').limit(10)
+        @activities = PublicActivity::Activity.where(recipient_id: @team.user.id).order('created_at DESC').limit(5)
       elsif current_user.userable_type == 'Mentor'
         @mentor = Mentor.joins(:user).where(users: { userable_id: current_user.userable_id }).first
-        @activities = PublicActivity::Activity.where(recipient_id: @mentor.user.id).order('created_at DESC').limit(10)
+        @activities = PublicActivity::Activity.where(recipient_id: @mentor.user.id).order('created_at DESC').limit(5)
       end
     end
   end
