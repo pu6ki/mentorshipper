@@ -1,5 +1,4 @@
 class Users::TeamsController < ApplicationController
-  before_action :authenticate_user!
   before_action :verify_mentor_user, only: [:index]
   before_action :set_team, only: [:show]
 

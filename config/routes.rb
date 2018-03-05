@@ -3,16 +3,18 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  namespace :users, path: 'users' do
-    resources :teams
-    resources :mentors
-  end
+  authenticate :user do
+    namespace :users, path: 'users' do
+      resources :teams
+      resources :mentors
+    end
 
-  get 'technologies' => 'technologies#index'
+    get 'technologies' => 'technologies#index'
 
-  resources :questions do
-    resources :answers do
-      put 'solving', on: :member
+    resources :questions do
+      resources :answers do
+        put 'solving', on: :member
+      end
     end
   end
 end

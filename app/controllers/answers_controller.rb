@@ -1,5 +1,4 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_question
   before_action :verify_mentor_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_answer, only: [:show, :update, :destroy, :solving]
