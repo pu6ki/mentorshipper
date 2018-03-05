@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     path = if current_user.mentor?
              users_teams_path
            elsif current_user.team?
-             technologies_path
+            users_team_path(current_user.userable)
            end
 
     redirect_to path
