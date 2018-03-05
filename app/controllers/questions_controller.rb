@@ -8,6 +8,8 @@ class QuestionsController < ApplicationController
   def index
     if params[:technology_name]
       @questions = Question.from_technology params[:technology_name]
+    elsif params[:team_id]
+      @questions = Question.from_team(params[:team_id])
     else
       @questions = Question.all
     end

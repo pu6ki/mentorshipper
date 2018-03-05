@@ -1,7 +1,9 @@
-<h1>Teams</h1>
+<div class="wrapper">
+  <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1 text-center">
+    <h1 class="heading">My Teams</h1>
 
-<ul>
-  <% @teams.each do |t| %>
-    <li><%= link_to t, users_team_path(t) %></li>
-  <% end %>
-</ul>
+    <% @teams.each do |t| %>
+      <%= link_to t, questions_path(team_id: t.id), class: "btn btn-info col-md-3 btn-technology" %>
+    <% end %>
+  </div>
+</div>

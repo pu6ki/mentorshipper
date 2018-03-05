@@ -1,2 +1,15 @@
-<h1><%= @team.name %></h1>
-<h3>Captain email: <%= @team.captain_email %></h3>
+<div class="user-details card text-center col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+  <div class="card-body">
+    <h2 class="card-title"><%= @team.name %></h2>
+    <h4 class="card-subtitle text-muted">Captain email: <%= mail_to @team.captain_email %></h4>
+    <% if @team.user.description %>
+      <hr>
+      <p class="card-text"><%= @team.user.description %></p>
+    <% end %>
+    <hr>
+    <h4>Team technologies: </h4>
+    <% @team.user.technologies.each do |tech| %>
+      <%= link_to tech, questions_path(technology_name: tech.name), class: "btn btn-info col-md-3 btn-technology" %>
+    <% end %>
+  </div>
+</div>
