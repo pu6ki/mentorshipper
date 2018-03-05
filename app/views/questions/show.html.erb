@@ -7,22 +7,18 @@
       <div class="card-body">
         <%= markdown(@question.content) %>
         <hr />
-        <div class="d-inline-flex w-100 justify-content-between">
-          <small class="text-muted">Asked by <%= link_to @question.team, users_team_path(@question.team) %></small>
-          <small>Asked on <span class="text-muted"><%= @question.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>
-        </div>
+
+        <%= render 'question_info', question: @question %>
       </div>
     </div>
 
     <hr>
   </div>
   <div class="col-md-8 offset-md-2">
-    <% if @question.answers.empty? %>
+    <% if @answers.empty? %>
       <h3 class="text-center heading">Nobody has answered this question yet.</h3>
     <% else %>
-      <% @question.answers.each do |answer| %>
-        <%= render answer %>
-      <% end %>
+      <%= render @answers %>
     <% end %>
   </div>
 

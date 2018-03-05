@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :delete]
   before_action :set_answer, only: [:show]
   before_action :verify_author, only: [:edit, :update, :destroy]
+  before_action :set_answers, only: [:show]
 
   def index
     if params[:technology_name]
@@ -54,12 +55,16 @@ class QuestionsController < ApplicationController
 
   private
 
+  def set_question
+    @question = Question.find_by id: params[:id]
+  end
+
   def set_answer
     @answer = Answer.new
   end
 
-  def set_question
-    @question = Question.find_by id: params[:id]
+  def set_answers
+    @answers = @question.answers
   end
 
   def question_params
