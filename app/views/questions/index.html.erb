@@ -10,10 +10,15 @@
 
     <div class="list-group">
       <% @questions.each do |question| %>
-        <!-- TODO: Change list item color if question is solved -->
         <%= link_to question, class: 'list-group-item flex-column align-items-start' do %>
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"><%= question.title %></h5>
+
+            <% if question.solved? %>
+              <p class="text-success">Solved</p>
+            <% else %>
+              <p class="text-warning">Unsolved</p>
+            <% end %>
           </div>
           <div class="d-inline-flex w-100 justify-content-between">
             <small class="text-muted">Asked by "<%= question.team %>"</small>

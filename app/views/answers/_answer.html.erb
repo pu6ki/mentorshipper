@@ -1,11 +1,24 @@
 <div class="wrapper">
   <div class="card answer">
     <div class="card-body">
-      <%= markdown(answer.content) %>
+      <div class="d-inline-flex w-100 justify-content-between">
+        <%= markdown(answer.content) %>
+
+        <% if @question.solved? %>
+          <p class="text-success">Solvable answer</p>
+        <% else %>
+          <%= form_for([@question, answer], url: solving_question_answer_path(@question, answer), method: :put) do |f| %>
+            <div class="text-center">
+              <%= f.submit class: 'btn btn-sm btn-success', value: 'Mark as solving' %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
       <hr />
       <div class="d-inline-flex w-100 justify-content-between">
-        <small class="text-muted">Answered by "<%= @question.team %>"</small>
-        <small>Answered on <span class="text-muted"><%= @question.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>          
+        <small class="text-muted">Answered by <%= answer.mentor %></small>
+        <small>Answered on <span class="text-muted"><%= answer.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>
       </div>
     </div>
   </div>

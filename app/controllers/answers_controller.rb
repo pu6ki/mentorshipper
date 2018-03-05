@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question
   before_action :verify_mentor_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_answer, only: [:show, :update, :destroy]
+  before_action :set_answer, only: [:show, :update, :destroy, :solving]
   before_action :verify_author, only: [:edit, :update, :destroy]
 
   def index
@@ -45,6 +45,16 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     flash[:notice] = 'Answer successfully deleted.'
+    redirect_to @question
+  end
+
+  def solving
+    if @answer.update_attributes(solving: true)
+      flash[:notice] = 'Question is successfully marked as solved.'
+    else
+      flash[:alert] = @answer.errors.full_messages
+    end
+
     redirect_to @question
   end
 
