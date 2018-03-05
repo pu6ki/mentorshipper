@@ -16,6 +16,7 @@
 
 @import "bootstrap";
 @import "toastr";
+@import "font-awesome";
 
 body {
   background-color: whitesmoke;
@@ -49,4 +50,22 @@ body {
 
 .notifications {
   padding: 0;
+}
+
+.btn-bottom {
+  position: fixed;
+  z-index: 1;
+  right: .5em;
+  bottom: 2em;
+  border: none;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  padding: 10px 16px;
+}
+
+.fa.fa-plus {
+  font-size: 30px !important;
+  line-height: 1.33 !important;
+  color: white;
 }
