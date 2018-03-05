@@ -5,7 +5,7 @@
         <% if params[:technology_name] %>
           Questions for <span class="text-info"><%= @technology %></p>
         <% elsif params[:team_id] %>
-          Questions from <span class="text-info"><%= link_to @team, users_team_path(@team) %></p>
+          Questions from <span class="text-info"><%= link_to @team, users_team_path(@team), class: 'team-link' %></p>
         <% else %>
           All questions
         <% end %>
