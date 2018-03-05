@@ -8,8 +8,6 @@
     <% end %>
     <hr>
     <h4>Team technologies: </h4>
-    <% @team.user.technologies.each do |tech| %>
-      <%= link_to tech, questions_path(technology_name: tech.name), class: "btn btn-info col-md-3 btn-technology" %>
-    <% end %>
+    <%= render partial: 'technologies/technology', collection: @team.user.technologies %>
   </div>
 </div>
