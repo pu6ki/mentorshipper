@@ -3,6 +3,8 @@
     <div class="text-center">
       <% if params[:technology_name] %>
         <h1 class="heading">Questions for <span class="text-info"><%= params[:technology_name] %></p></h1>
+      <% elsif params[:team_id] %>
+        <h1 class="heading">Questions from <span class="text-info"><%= Team.find_by(id: params[:team_id].to_i).name %></p></h1>        
       <% else %>
         <h1 class="heading">All questions</h1>
       <% end %>
