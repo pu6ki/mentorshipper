@@ -7,14 +7,18 @@ class QuestionsController < ApplicationController
 
   def index
     if params[:technology_name]
-      @questions = Question.from_technology params[:technology_name]
+      @technology = Technology.find_by name: params[:technology_name]
+      @questions = @technology.questions
     elsif params[:team_id]
-      @questions = Question.from_team(params[:team_id])
+      @team = Team.find_by id: params[:team_id]
+      @questions = @team.questions
     else
       @questions = Question.all
     end
 
-    @questions = Question.sort_solved(@questions)
+    puts @questions
+
+    @questions = Question.sort_solved @questions
   end
 
   def show
@@ -74,10 +78,12 @@ class QuestionsController < ApplicationController
   end
 
   def verify_team_user
+    flash[:alert] = 'You should be a team in order to access this view.'
     redirect_to questions_path unless current_user.team?
   end
 
   def verify_author
+    flash[:alert] = 'You should be the author of the question in order to modify it.'
     redirect_to questions_path unless @question.team == current_user.userable
   end
 end

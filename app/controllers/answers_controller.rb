@@ -72,10 +72,12 @@ class AnswersController < ApplicationController
   end
 
   def verify_mentor_user
+    flash[:alert] = 'You should be a mentor in order to access this view.'
     redirect_to @question unless current_user.mentor?
   end
 
   def verify_author
+    flash[:alert] = 'You should be the author of the answer in order to modify it.'
     redirect_to @question unless @answer.mentor == current_user.userable
   end
 end
