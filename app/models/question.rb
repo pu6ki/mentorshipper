@@ -22,5 +22,9 @@ class Question < ApplicationRecord
     def from_technology(technology_name)
       select { |q| q.technology.name == technology_name }
     end
+
+    def sort_solved(questions)
+      questions.sort_by { |question| question.solved? ? 1 : 0 }
+    end
   end
 end

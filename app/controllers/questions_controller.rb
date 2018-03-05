@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!
   before_action :verify_team_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_question, only: [:show, :edit, :update, :delete]
   before_action :set_answer, only: [:show]
@@ -12,7 +11,7 @@ class QuestionsController < ApplicationController
       @questions = Question.all
     end
 
-    @questions = @questions.sort_by { |question| question.solved? ? 0 : 1 }
+    @questions = Question.sort_solved(@questions)
   end
 
   def show
