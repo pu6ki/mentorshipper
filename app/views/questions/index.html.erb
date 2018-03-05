@@ -20,10 +20,8 @@
               <p class="text-warning">Unsolved</p>
             <% end %>
           </div>
-          <div class="d-inline-flex w-100 justify-content-between">
-            <small class="text-muted">Asked by <%= link_to question.team, users_team_path(question.team) %></small>
-            <small>Asked on <span class="text-muted"><%= question.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>
-          </div>
+
+          <%= render 'question_info', question: question %>
         <% end %>
       <% end %>
     </div>
