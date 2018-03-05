@@ -8,7 +8,7 @@
       <% end %>
     </div>
 
-    <div class="list-group">
+    <div class="list-group questions">
       <% @questions.each do |question| %>
         <!-- TODO: Change list item color if question is solved -->
         <%= link_to question, class: 'list-group-item flex-column align-items-start' do %>
@@ -22,5 +22,11 @@
         <% end %>
       <% end %>
     </div>
+
+    <% if @team %>  
+      <a href="/questions/new" class="btn btn-info btn-bottom" data-toggle="tooltip" data-placement="top" title="Add question">
+        <%= fa_icon 'plus' %>
+      </a>
+    <% end %>
   </div>
 </div>
