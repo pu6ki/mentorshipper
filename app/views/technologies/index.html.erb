@@ -3,9 +3,7 @@
     <h1 class="text-center heading">Choose a technology</h1>
 
     <div class="text-center">
-      <% @technologies.each do |tech| %>
-        <%= link_to tech, questions_path(technology_name: tech.name), class: "btn btn-info col-md-3 btn-technology" %>
-      <% end %>
+      <%= render @technologies %>
     </div>
   </div>
 </div>
