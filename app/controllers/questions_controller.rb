@@ -11,6 +11,8 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.all
     end
+
+    @questions = @questions.sort_by { |question| question.solved? ? 0 : 1 }
   end
 
   def show
