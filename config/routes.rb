@@ -3,16 +3,18 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  namespace :users, path: 'users' do
-    resources :teams
-    resources :mentors
+  authenticate :user do
+    namespace :users, path: 'users' do
+      resources :teams
+      resources :mentors
+    end
+
+    get 'technologies' => 'technologies#index'
+
+    resources :questions do
+      resources :answers do
+        put 'solving', on: :member
+      end
+    end
   end
-
-  get 'technologies' => 'technologies#index'
-
-  resources :questions do
-    resources :answers
-  end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

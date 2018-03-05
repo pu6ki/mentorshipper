@@ -1,10 +1,12 @@
 class Answer < ApplicationRecord
   include Writable
+  include PublicActivity::Model
 
   belongs_to :mentor
   belongs_to :question
 
-  include PublicActivity::Model
-  tracked owner: Proc.new { |controller, model| controller.current_user }
-  tracked recipient: Proc.new { |controller, model| model.question.team.user }
+  default_scope { order(:solving, :created_at) }
+
+  tracked owner:     proc { |controller, _| controller.current_user  }
+  tracked recipient: proc { |_, model|      model.question.team.user }
 end

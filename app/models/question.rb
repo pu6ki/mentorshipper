@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
   include Writable
+  include PublicActivity::Model
 
   belongs_to :team
   belongs_to :technology
@@ -10,9 +11,8 @@ class Question < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
-  include PublicActivity::Model
-  tracked owner: Proc.new { |controller, model| controller.current_user }
-  tracked recipient: Proc.new { |controller, model| model.team.mentor.user }
+  tracked owner: proc     { |controller, _| controller.current_user }
+  tracked recipient: proc { |_, model|      model.team.mentor.user  }
 
   def solved?
     answers.select(&:solving).count > 0
@@ -21,6 +21,10 @@ class Question < ApplicationRecord
   class << self
     def from_technology(technology_name)
       select { |q| q.technology.name == technology_name }
+    end
+
+    def sort_solved(questions)
+      questions.sort_by { |question| question.solved? ? 1 : 0 }
     end
   end
 end
