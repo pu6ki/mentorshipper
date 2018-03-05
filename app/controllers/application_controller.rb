@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
 
   def load_activities
     if current_user
-      if current_user.userable_type == 'Team'
+      if current_user.team?
         @team = Team.joins(:user).where(users: { userable_id: current_user.userable_id }).first
         @activities = PublicActivity::Activity.where(recipient_id: @team.user.id).order('created_at DESC').limit(5)
-      elsif current_user.userable_type == 'Mentor'
+      elsif current_user.mentor?
         @mentor = Mentor.joins(:user).where(users: { userable_id: current_user.userable_id }).first
         @activities = PublicActivity::Activity.where(recipient_id: @mentor.user.id).order('created_at DESC').limit(5)
       end
