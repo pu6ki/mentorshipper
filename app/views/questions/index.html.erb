@@ -29,7 +29,7 @@
     </div>
 
     <% if current_user.team? %>
-      <a href="/questions/new" class="btn btn-info btn-bottom" data-toggle="tooltip" data-placement="top" title="Add question">
+      <a href="<%= new_question_path %>" class="btn btn-info btn-bottom" data-toggle="tooltip" data-placement="top" title="Add question">
         <%= fa_icon 'plus' %>
       </a>
     <% end %>
