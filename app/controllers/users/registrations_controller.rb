@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     @user = User.create!(params[:user].permit!)
+    @user.send_reset_password_instructions
 
     render json: @user, include: { technologies: { only: :name } }
   end
