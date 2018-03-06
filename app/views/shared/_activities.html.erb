@@ -1,11 +1,9 @@
-<div class="col-sm-3">
-  <ul class="notifications">
-    <% if @activities.length > 0 %>
-      <%= render_activities @activities %>
-    <% else %>
-      <li class="dropdown-item">
-        No new notifications
-      </li>
-    <% end %>
-  </ul>
-</div>
+<ul class="notifications">
+  <% if @activities.length > 0 %>
+    <%= render_activities @activities %>
+  <% else %>
+    <li class="dropdown-item">
+      No new notifications
+    </li>
+  <% end %>
+</ul>

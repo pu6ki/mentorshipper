@@ -22,7 +22,10 @@
     <% end %>
   </div>
 
-  <div class="col-md-10 offset-md-1">
-    <%= render 'answers/form' %>
-  </div>
+  
+  <% if current_user.mentor? %>  
+    <div class="col-md-10 offset-md-1">
+      <%= render 'answers/form' %>
+    </div>
+  <% end %>
 </div>
