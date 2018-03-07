@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_question
   before_action :verify_mentor_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :verify_team_user, only: [:solving]
   before_action :set_answer, only: [:show, :update, :edit, :destroy, :solving]
   before_action :verify_author, only: [:edit, :update, :destroy]
 
@@ -74,6 +75,13 @@ class AnswersController < ApplicationController
   def verify_mentor_user
     unless current_user.mentor?
       flash[:alert] = 'You should be a mentor in order to access this view.'
+      redirect_to @question
+    end
+  end
+
+  def verify_team_user
+    unless current_user.team?
+      flash[:alert] = 'You should be a team in order to mark this answer as solving.'
       redirect_to @question
     end
   end
