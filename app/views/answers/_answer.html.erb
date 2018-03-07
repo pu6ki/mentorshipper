@@ -15,11 +15,18 @@
         <% end %>
       </div>
 
-      <hr />
+      <hr>
+      
       <div class="d-inline-flex w-100 justify-content-between">
         <small class="text-muted">Answered by <%= answer.mentor %></small>
         <small>Answered on <span class="text-muted"><%= answer.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>
       </div>
+      
+      <% if current_user == answer.mentor.user %>
+        <div class="text-center">
+          <%= link_to "Edit", edit_question_answer_path(@question, answer), class: 'btn btn-sm btn-info' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -9,6 +9,11 @@
         <hr />
 
         <%= render 'question_info', question: @question %>
+        <% if current_user == @question.team.user %>
+          <div class="text-center">
+            <%= link_to "Edit", edit_question_path, class: 'btn btn-info' %>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -22,7 +27,10 @@
     <% end %>
   </div>
 
-  <div class="col-md-10 offset-md-1">
-    <%= render 'answers/form' %>
-  </div>
+  
+  <% if current_user.mentor? %>  
+    <div class="col-md-10 offset-md-1">
+      <%= render 'answers/form', form_title: 'Add Answer' %>
+    </div>
+  <% end %>
 </div>

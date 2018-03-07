@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_question
   before_action :verify_mentor_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_answer, only: [:show, :update, :destroy, :solving]
+  before_action :set_answer, only: [:show, :update, :edit, :destroy, :solving]
   before_action :verify_author, only: [:edit, :update, :destroy]
 
   def index
@@ -34,7 +34,7 @@ class AnswersController < ApplicationController
   def update
     if @answer.update_attributes(answer_params)
       flash[:notice] = 'Answer updated successfully.'
-      redirect_to @answer
+      redirect_to @question
     else
       flash[:alert] = @answer.errors.full_messages
       render 'edit'
