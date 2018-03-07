@@ -6,7 +6,7 @@
 
         <% if @question.solved? %>
           <p class="text-success">Solving answer</p>
-        <% else %>
+        <% elsif current_user == @question.team.user %>
           <%= form_for([@question, answer], url: solving_question_answer_path(@question, answer), method: :put) do |f| %>
             <div class="text-center">
               <%= f.submit class: 'btn btn-sm btn-success', value: 'Mark as solving' %>
