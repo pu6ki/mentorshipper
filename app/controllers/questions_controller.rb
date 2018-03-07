@@ -78,12 +78,16 @@ class QuestionsController < ApplicationController
   end
 
   def verify_team_user
-    flash[:alert] = 'You should be a team in order to access this view.'
-    redirect_to questions_path unless current_user.team?
+    unless current_user.team?
+      flash[:alert] = 'You should be a team in order to access this view.'
+      redirect_to questions_path
+    end
   end
 
   def verify_author
-    flash[:alert] = 'You should be the author of the question in order to modify it.'
-    redirect_to questions_path unless @question.team == current_user.userable
+    unless @question.team == current_user.userable
+      flash[:alert] = 'You should be the author of the question in order to modify it.'
+      redirect_to questions_path
+    end
   end
 end
