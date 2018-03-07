@@ -18,10 +18,13 @@
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"><%= link_to question.title, question %></h5>
             <% if question.solved? %>
-              <p class="text-success">Answered</p>
+              <p class="text-success">Solved
             <% else %>
-              <p class="text-warning">Unanswered</p>
+              <p class="text-warning">Unsolved
             <% end %>
+
+            <span class="text-muted"> (<%= pluralize(question.answers.count, 'answer') %>)</span>
+            </p>
           </div>
           <%= render 'question_info', question: question %>
         </div>

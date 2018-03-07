@@ -4,7 +4,7 @@
       <div class="d-inline-flex w-100 justify-content-between">
         <%= markdown(answer.content) %>
 
-        <% if @question.solved? %>
+        <% if answer.solving %>
           <p class="text-success">Solving answer</p>
         <% elsif current_user == @question.team.user %>
           <%= form_for([@question, answer], url: solving_question_answer_path(@question, answer), method: :put) do |f| %>
@@ -15,13 +15,13 @@
         <% end %>
       </div>
 
-      <hr>
-      
+      <hr />
+
       <div class="d-inline-flex w-100 justify-content-between">
         <small class="text-muted">Answered by <%= answer.mentor %></small>
         <small>Answered on <span class="text-muted"><%= answer.created_at.strftime('%d-%m-%Y %H:%M') %></span></small>
       </div>
-      
+
       <% if current_user == answer.mentor.user %>
         <div class="text-center">
           <%= link_to "Edit", edit_question_answer_path(@question, answer), class: 'btn btn-sm btn-info' %>
