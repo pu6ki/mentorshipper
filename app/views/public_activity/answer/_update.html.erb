@@ -1,0 +1,10 @@
+<li class="dropdown-item">
+  <small class="text-muted"><%= a.created_at.strftime('%-d %B %Y %H:%M:%S') %></small><br/>
+  <strong><%= a.trackable.mentor.user.full_name%></strong> 
+  edited answer for question
+  <% if a.trackable %>
+    <%= link_to a.trackable.question.title, question_path(a.trackable.question) %>
+  <% else %>
+    that has been deleted
+  <% end %>
+</li>
