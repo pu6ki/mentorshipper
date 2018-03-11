@@ -21,6 +21,7 @@ class AnswersController < ApplicationController
     @answer.mentor = current_user.userable
 
     if @answer.save
+      NotificationMailer.notification_email(@answer.mentor.user, @question).deliver_later
       flash[:notice] = 'You have successfully created an answer.'
       redirect_to @question
     else
@@ -34,6 +35,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update_attributes(answer_params)
+      NotificationMailer.notification_email(@answer.mentor.user, @question).deliver_later
       flash[:notice] = 'Answer updated successfully.'
       redirect_to @question
     else

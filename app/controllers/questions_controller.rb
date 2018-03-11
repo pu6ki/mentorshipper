@@ -32,6 +32,7 @@ class QuestionsController < ApplicationController
     @question = current_user.userable.questions.new question_params
 
     if @question.save
+      NotificationMailer.notification_email(@question.team.user, @question).deliver_later
       flash[:notice] = 'You have successfully created a question.'
       redirect_to @question
     else
@@ -45,6 +46,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update_attributes(question_params)
+      NotificationMailer.notification_email(@question.team.user, @question).deliver_later
       flash[:notice] = 'Question updated successfully.'
       redirect_to @question
     else

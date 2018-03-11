@@ -48,10 +48,6 @@ body {
   background-color: white;
 }
 
-.notifications {
-  padding: 0;
-}
-
 .btn-bottom {
   position: fixed;
   z-index: 1;
@@ -75,7 +71,7 @@ a:hover {
 }
 
 .notifications {
-  padding: 10px !important;
+  padding: 5px !important;
   color: white !important;
   border: none;
 }
