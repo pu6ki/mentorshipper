@@ -9,14 +9,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  #POST /resource
+  # POST /resource
   def create
-    params[:user][:technologies].map! do |technology|
-      Technology.find_or_create_by!(name: technology[:name])
+    technologies = []
+    params[:user][:technologies].each do |name|
+      technologies.push(Technology.find_or_create_by!(name: name))
     end
 
-    @user = User.create!(params[:user].permit!)
-    @user.send_reset_password_instructions
+    params[:user][:technologies] = technologies
+
+    @user = User.find_by(email: params[:user][:email])
+    if @user.nil?
+      @user = User.create!(params[:user].permit!)
+    end
+    if params[:user_type] == 'mentor'
+      @mentor = Mentor.create!(user: @user)
+    end
+    # @user.send_reset_password_instructions
 
     render json: @user, include: { technologies: { only: :name } }
   end
@@ -49,7 +58,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, :first_name, :last_name, :technologies])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, :first_name, :last_name, technologies: []])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
