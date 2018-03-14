@@ -24,6 +24,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     if params[:user_type] == 'mentor'
       @mentor = Mentor.create!(user: @user)
+    elsif params[:user_type] == 'team'
+      @mentor = Mentor.joins(:user).where(users: { email: params[:mentor_email] }).first
+      @team = Team.create!(user: @user, name: params[:team_name], mentor: @mentor)
     end
     # @user.send_reset_password_instructions
 
