@@ -18,5 +18,5 @@ Rails.application.routes.draw do
     end
   end
 
-  # post 'technologies' => 'technologies#create'
+  post 'technologies' => 'technologies#create'
 end
