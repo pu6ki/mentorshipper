@@ -2,12 +2,16 @@
   <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
     <div class="text-center">
       <h1 class="heading">
-        <% if params[:technology_name] %>
-          Questions for <span class="text-info"><%= @technology %></p>
-        <% elsif params[:team_id] %>
-          Questions from <span class="text-info"><%= link_to @team, users_team_path(@team), class: 'team-link' %></p>
+        <% if @questions.empty? %>
+            There are no questions added yet.
         <% else %>
-          All questions
+            <% if params[:technology_name] %>
+                Questions for <span class="text-info"><%= @technology %></p>
+            <% elsif params[:team_id] %>
+                Questions from <span class="text-info"><%= link_to @team, users_team_path(@team), class: 'team-link' %></p>
+            <% else %>
+                All questions
+            <% end %>
         <% end %>
       </h1>
     </div>
