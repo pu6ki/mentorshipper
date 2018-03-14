@@ -1,5 +1,5 @@
 class PasswordsController < Devise::PasswordsController
   def edit
-    render '/set'
+    render 'set'
   end
 end

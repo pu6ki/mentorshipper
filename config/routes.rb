@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'users#index'
 
-  devise_for :users, controllers: { registrations: 'users/registrations', passwords: 'user/passwords' }
+  devise_for :users, controllers: { registrations: 'users/registrations', passwords: 'users/passwords' }
 
   authenticate :user do
     namespace :users, path: 'users' do
